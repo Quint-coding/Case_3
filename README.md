@@ -1,4 +1,4 @@
-# 📦 Streamlit App Starter Kit 
+# Case 3
 ```
 ⬆️ (Replace above with your app's name)
 ```
