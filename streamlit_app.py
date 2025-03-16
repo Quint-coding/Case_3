@@ -20,10 +20,10 @@ st.pydeck_chart(
     pdk.Deck(
         map_style=None,
         initial_view_state=pdk.ViewState(
-            latitude=37.76,
-            longitude=-122.4,
-            zoom=11,
-            pitch=50,
+            latitude=df["Latitude"].mean(),
+            longitude=df["Longitude"].mean(),
+            zoom=12,
+            pitch=40,
         ),
         layers=[
             pdk.Layer(
