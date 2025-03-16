@@ -32,17 +32,17 @@ st.pydeck_chart(
                 get_position="[Longitude, Latitude]",
                 radius=200,
                 elevation_scale=4,
-                elevation_range=[0, 1000],
+                elevation_range=[0, 100],
                 pickable=True,
                 extruded=True,
             ),
-            pdk.Layer(
-                "ScatterplotLayer",
-                data=df,
-                get_position="[Longitude, Latitude]",
-                get_color="[200, 30, 0, 160]",
-                get_radius=200,
-            ),
+            # pdk.Layer(
+            #     "ScatterplotLayer",
+            #     data=df,
+            #     get_position="[Longitude, Latitude]",
+            #     get_color="[200, 30, 0, 160]",
+            #     get_radius=200,
+            # ),
         ],
     )
 )
