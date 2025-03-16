@@ -1,49 +1,40 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import pydeck as pdk
 
-# Streamlit app title
-st.title("Geographical Busyness of London Stations")
-
-# Sample data: Replace with real station coordinates and busyness levels
-data = {
-    "Station": ["Waterloo", "Victoria", "Liverpool Street", "Euston", "Paddington"],
-    "Latitude": [51.5033, 51.4964, 51.5175, 51.5281, 51.5154],
-    "Longitude": [-0.113, -0.144, -0.082, -0.133, -0.175],
-    "Busyness": [100, 80, 90, 70, 85]  # Example busyness levels
-}
-
-df = pd.DataFrame(data)
-
+chart_data = pd.DataFrame(
+    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+    columns=["lat", "lon"],
+)
 
 st.pydeck_chart(
     pdk.Deck(
         map_style=None,
         initial_view_state=pdk.ViewState(
-            latitude=df["Latitude"].mean(),
-            longitude=df["Longitude"].mean(),
-            zoom=12,
-            pitch=40,
+            latitude=37.76,
+            longitude=-122.4,
+            zoom=11,
+            pitch=50,
         ),
         layers=[
             pdk.Layer(
                 "HexagonLayer",
-                data=df,
-                get_position="[Longitude, Latitude]",
+                data=chart_data,
+                get_position="[lon, lat]",
                 radius=200,
-                elevation_scale=50,
-                elevation_range=[0, 100],
+                elevation_scale=4,
+                elevation_range=[0, 1000],
                 pickable=True,
                 extruded=True,
-                get_elevation= "Busyness"
             ),
-            # pdk.Layer(
-            #     "ScatterplotLayer",
-            #     data=df,
-            #     get_position="[Longitude, Latitude]",
-            #     get_color="[200, 30, 0, 160]",
-            #     get_radius=200,
-            # ),
+            pdk.Layer(
+                "ScatterplotLayer",
+                data=chart_data,
+                get_position="[lon, lat]",
+                get_color="[200, 30, 0, 160]",
+                get_radius=200,
+            ),
         ],
     )
 )
