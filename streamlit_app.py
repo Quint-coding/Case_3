@@ -10,6 +10,8 @@ chart_data = pd.DataFrame(
     columns=["lat", "lon"],
 )
 
+print(chart_data.head())
+
 st.pydeck_chart(
     pdk.Deck(
         map_style=None,
@@ -28,7 +30,7 @@ st.pydeck_chart(
                 elevation_scale=4,
                 # elevation_range=[0, 1000],
                 pickable=True,
-                extruded=False,
+                extruded=True,
             ),
         ],
     )
