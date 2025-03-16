@@ -33,13 +33,7 @@ st.pydeck_chart(
                 extruded=True,
                 auto_highlight=True,
             ),
-            pdk.Layer(
-                'ScatterplotLater',
-                data=df,
-                get_color="[200, 30, 0, 160]",
-                get_position="[Longitude, Latitude]",
-                get_radius=200,
-            ),
         ],
     )
 )
+st.radio(options=list, tooltips=list)
