@@ -27,7 +27,7 @@ st.pydeck_chart(
                 data=df,
                 get_position="[Longitude, Latitude]",
                 radius=200,
-                elevation_scale=10,
+                elevation_scale=50,
                 elevation_range=[0, 1000],
                 pickable=True,
                 extruded=True,
