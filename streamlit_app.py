@@ -15,31 +15,34 @@ data = {
 
 df = pd.DataFrame(data)
 
-# Define Pydeck layer
-layer = pdk.Layer(
-    "ScatterplotLayer",
-    df,
-    get_position=["Longitude", "Latitude"],
-    get_radius="Busyness",
-    get_color=[255, 0, 0, 160],
-    pickable=True,
-    opacity=0.6,
-)
 
-# Define Pydeck view
-view_state = pdk.ViewState(
-    latitude=df["Latitude"].mean(),
-    longitude=df["Longitude"].mean(),
-    zoom=12,
-    pitch=40,
+st.pydeck_chart(
+    pdk.Deck(
+        map_style=None,
+        initial_view_state=pdk.ViewState(
+            latitude=37.76,
+            longitude=-122.4,
+            zoom=11,
+            pitch=50,
+        ),
+        layers=[
+            pdk.Layer(
+                "HexagonLayer",
+                data=df,
+                get_position="[Longitude, Latitude]",
+                radius=200,
+                elevation_scale=4,
+                elevation_range=[0, 1000],
+                pickable=True,
+                extruded=True,
+            ),
+            pdk.Layer(
+                "ScatterplotLayer",
+                data=df,
+                get_position="[Longitude, Latitude]",
+                get_color="[200, 30, 0, 160]",
+                get_radius=200,
+            ),
+        ],
+    )
 )
-
-# Create Pydeck map
-map = pdk.Deck(
-    layers=[layer],
-    initial_view_state=view_state,
-    tooltip={"text": "{Station}: {Busyness} people"},
-)
-
-# Display the map in Streamlit
-st.pydeck_chart(map)
