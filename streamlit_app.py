@@ -1,7 +1,6 @@
 import streamlit as st
-import geopandas as gpd
-import matplotlib.pyplot as plt
 import pandas as pd
+import pydeck as pdk
 
 # Streamlit app title
 st.title("Geographical Busyness of London Stations")
@@ -14,25 +13,33 @@ data = {
     "Busyness": [100, 80, 90, 70, 85]  # Example busyness levels
 }
 
-# Convert data to GeoDataFrame
 df = pd.DataFrame(data)
-gdf = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.Longitude, df.Latitude))
 
-# Load a basemap of London (or any shapefile of interest)
-world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+# Define Pydeck layer
+layer = pdk.Layer(
+    "ScatterplotLayer",
+    df,
+    get_position=["Longitude", "Latitude"],
+    get_radius="Busyness",
+    get_color=[255, 0, 0, 160],
+    pickable=True,
+    opacity=0.6,
+)
 
-# Create plot
-fig, ax = plt.subplots(figsize=(8, 6))
-world[world.name == "United Kingdom"].plot(ax=ax, color='lightgrey')
-gdf.plot(ax=ax, column="Busyness", cmap="coolwarm", markersize=gdf["Busyness"] * 2, legend=True, edgecolor='black')
+# Define Pydeck view
+view_state = pdk.ViewState(
+    latitude=df["Latitude"].mean(),
+    longitude=df["Longitude"].mean(),
+    zoom=12,
+    pitch=40,
+)
 
-# Annotate stations
-for idx, row in gdf.iterrows():
-    ax.text(row.Longitude, row.Latitude, row.Station, fontsize=9, ha='right')
+# Create Pydeck map
+map = pdk.Deck(
+    layers=[layer],
+    initial_view_state=view_state,
+    tooltip={"text": "{Station}: {Busyness} people"},
+)
 
-ax.set_title("London Stations Busyness")
-ax.set_xlabel("Longitude")
-ax.set_ylabel("Latitude")
-
-# Display the plot in Streamlit
-st.pyplot(fig)
+# Display the map in Streamlit
+st.pydeck_chart(map)
