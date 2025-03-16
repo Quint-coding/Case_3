@@ -3,12 +3,14 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 
-np.random.seed(20)
+# np.random.seed(20)
 
-chart_data = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-    columns=["lat", "lon"],
-)
+# chart_data = pd.DataFrame(
+#     np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+#     columns=["lat", "lon"],
+# )
+
+st.title("3D kaart van de fiets drukte op stations")
 
 df = pd.read_csv('bestedatasetopoitbombaclat2.csv')
 
@@ -36,4 +38,3 @@ st.pydeck_chart(
         ],
     )
 )
-st.radio(options=list, tooltips=list)
