@@ -10,7 +10,7 @@ chart_data = pd.DataFrame(
     columns=["lat", "lon"],
 )
 
-df = pd.read_csv('bestedatasetopoitbombaclat.csv')
+df = pd.read_csv('../bestedatasetopoitbombaclat.csv')
 
 st.pydeck_chart(
     pdk.Deck(
