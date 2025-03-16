@@ -28,7 +28,7 @@ st.pydeck_chart(
                 get_position="[Longitude, Latitude]",
                 radius=200,
                 elevation_scale=4,
-                elevation_range=[0, 1000],
+                elevation_range=[0, 100],
                 pickable=True,
                 extruded=True,
             ),
