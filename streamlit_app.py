@@ -35,6 +35,7 @@ st.pydeck_chart(
                 elevation_range=[0, 100],
                 pickable=True,
                 extruded=True,
+                get_elevation= "Busyness"
             ),
             # pdk.Layer(
             #     "ScatterplotLayer",
