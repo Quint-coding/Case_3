@@ -10,26 +10,25 @@ chart_data = pd.DataFrame(
     columns=["lat", "lon"],
 )
 
-st.write(
-chart_data.head()
-)
+df = pd.read_csv('bestedatasetopoitbombaclat.csv')
+
 st.pydeck_chart(
     pdk.Deck(
         map_style=None,
         initial_view_state=pdk.ViewState(
-            latitude=37.76,
-            longitude=-122.4,
+            latitude=51.50853,
+            longitude=-0.12574,
             zoom=11,
             pitch=50,
         ),
         layers=[
             pdk.Layer(
                 "HexagonLayer",
-                data=chart_data,
-                get_position="[lon, lat]",
+                data=df,
+                get_position="[Longitude, Latitude]",
                 radius=200,
                 elevation_scale=4,
-                # elevation_range=[0, 1000],
+                elevation_range=[0, 1000],
                 pickable=True,
                 extruded=True,
             ),
