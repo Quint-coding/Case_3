@@ -10,8 +10,9 @@ chart_data = pd.DataFrame(
     columns=["lat", "lon"],
 )
 
-print(chart_data.head())
-
+st.write(
+chart_data.head()
+)
 st.pydeck_chart(
     pdk.Deck(
         map_style=None,
