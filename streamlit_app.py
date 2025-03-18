@@ -31,8 +31,8 @@ options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
 tooltip = {
-    "html": "<b>Busyness:</b> {0}".format("{traveler_count}"),
-    "style": {"backgroundColor": "steelblue", "color": "white"},
+    "text": "Station: {Station}\nBusyness: {traveler_count}",
+    "style": {"backgroundColor": "steelblue", "color": "white"}
 }
 
 ViewState = pdk.ViewState(
@@ -51,7 +51,7 @@ st.pydeck_chart(
                 "HexagonLayer",
                 data=df,
                 get_position="[Longitude, Latitude]",
-                radius=2000,
+                radius=200,
                 elevation_scale=5,
                 elevation_range=[0, 100],
                 pickable=True,
