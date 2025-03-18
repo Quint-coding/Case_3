@@ -84,5 +84,5 @@ layer = pdk.Layer(
 
 
 # Render
-r = pdk.Deck(layers=[layer], initial_view_state=ViewState, tooltip={"text": "{Station}\n{traveler_count}"})
+r = pdk.Deck(layers=[layer], initial_view_state=ViewState, tooltip={"text": "Station: {Station}\n{traveler_count}"})
 st.pydeck_chart(r)
