@@ -30,15 +30,17 @@ st.markdown(
 options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
-st.pydeck_chart(
-    pdk.Deck(
-        map_style=None,
-        initial_view_state=pdk.ViewState(
+ViewState = pdk.ViewState(
             latitude=51.50853,
             longitude=-0.12574,
             zoom=11,
             pitch=50,
-        ),
+        )
+
+st.pydeck_chart(
+    pdk.Deck(
+        map_style=None,
+        initial_view_state=ViewState,
         layers=[
             pdk.Layer(
                 "HexagonLayer",
@@ -55,8 +57,8 @@ st.pydeck_chart(
     )
 )
 
-chart = pydeck.Deck(
+chart = st.pydeck.Deck(
     point_layer,
-    initial_view_state=view_state,
+    initial_view_state=ViewState,
     tooltip={"text": "{Station}, \nDrukte: {Start date}"},
 )
