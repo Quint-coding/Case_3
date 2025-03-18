@@ -48,7 +48,7 @@ st.pydeck_chart(
         initial_view_state=ViewState,
         layers=[
             pdk.Layer(
-                "HexagonLayer",
+                "ScatterplotLayer",
                 data=df,
                 get_position=["Longitude", "Latitude"],
                 radius=200,
