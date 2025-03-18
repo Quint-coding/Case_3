@@ -89,4 +89,6 @@ view_state = pdk.ViewState(
 )
 
 # Render
-pdk.Deck(layers=[layer], initial_view_state=view_state)
+pdk_map = pdk.Deck(layers=[layer], initial_view_state=view_state)
+
+st.pydeck_chart(pdk_map)
