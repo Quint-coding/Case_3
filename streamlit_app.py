@@ -30,10 +30,10 @@ st.markdown(
 options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
-# tooltip = {
-#     "html": "<b>Busyness:</b> {busyness}",
-#     "style": {"backgroundColor": "steelblue", "color": "white"},
-# }
+tooltip = {
+    "html": "<b>Busyness:</b> {busyness}",
+    "style": {"backgroundColor": "steelblue", "color": "white"},
+}
 
 ViewState = pdk.ViewState(
             latitude=51.50853,
@@ -59,7 +59,7 @@ st.pydeck_chart(
                 auto_highlight=True,
             ),
         ],
-        # tooltip = tooltip
+        tooltip = tooltip
     )
 )
 
