@@ -31,7 +31,7 @@ options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
 tooltip = {
-    "html": "<b>Busyness:</b> {traveler_count}",
+    "html": "<b>Busyness:</b> {0}".format("{traveler_count}"),
     "style": {"backgroundColor": "steelblue", "color": "white"},
 }
 
@@ -42,25 +42,46 @@ ViewState = pdk.ViewState(
             pitch=50,
         )
 
+# st.pydeck_chart(
+#     pdk.Deck(
+#         map_style=None,
+#         initial_view_state=ViewState,
+#         layers=[
+#             pdk.Layer(
+#                 "HexagonLayer",
+#                 data=df,
+#                 get_position="[Longitude, Latitude]",
+#                 radius=1000,
+#                 elevation_scale=5,
+#                 elevation_range=[0, 100],
+#                 pickable=True,
+#                 extruded=True,
+#                 auto_highlight=True,
+#             ),
+#         ],
+#         tooltip = tooltip
+#     )
+# )
+
+# HexagonLayer fix
+hex_layer = pdk.Layer(
+    "HexagonLayer",
+    data=df,
+    get_position=["Longitude", "Latitude"],
+    get_elevation="traveler_count",  # Ensure it's used
+    radius=300,  # Adjust for visibility
+    elevation_scale=100,
+    pickable=True,
+    extruded=True,
+    auto_highlight=True,
+)
+
+# PyDeck visualization
 st.pydeck_chart(
     pdk.Deck(
         map_style=None,
         initial_view_state=ViewState,
-        layers=[
-            pdk.Layer(
-                "HexagonLayer",
-                data=df,
-                get_position="[Longitude, Latitude]",
-                get_elevation="traveler_count",
-                radius=1000,
-                elevation_scale=5,
-                elevation_range=[0, 100],
-                pickable=True,
-                extruded=True,
-                auto_highlight=True,
-            ),
-        ],
-        tooltip = tooltip
+        layers=[hex_layer],
+        tooltip=tooltip  # Ensure tooltip works
     )
 )
-
