@@ -52,7 +52,7 @@ st.pydeck_chart(
                 data=df,
                 get_position="[Longitude, Latitude]",
                 get_elevation="traveler_count",
-                radius=200,
+                radius=1000,
                 elevation_scale=5,
                 elevation_range=[0, 100],
                 pickable=True,
