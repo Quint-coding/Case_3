@@ -30,10 +30,10 @@ st.markdown(
 options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
-tooltip = {
-    "html": "<b>Station:</b> {Station}<br><b>Busyness:</b> {traveler_count}",
-    "style": {"backgroundColor": "steelblue", "color": "white"}
-}
+# tooltip = {
+#     "html": "<b>Station:</b> {Station}<br><b>Busyness:</b> {traveler_count}",
+#     "style": {"backgroundColor": "steelblue", "color": "white"}
+# }
 
 ViewState = pdk.ViewState(
             latitude=51.50853,
@@ -42,25 +42,47 @@ ViewState = pdk.ViewState(
             pitch=50,
         )
 
-st.pydeck_chart(
-    pdk.Deck(
-        map_style=None,
-        initial_view_state=ViewState,
-        layers=[
-            pdk.Layer(
-                "HexagonLayer",
-                data=df,
-                get_position="[Longitude, Latitude]",
-                get_elevation="traveler_count",
-                get_fill_color="[255, traveler_count, 100]",
-                radius=300,
-                elevation_scale=5,
-                elevation_range=[0, 100],
-                pickable=True,
-                extruded=True,
-                auto_highlight=True,
-            ),
-        ],
-        tooltip = tooltip
-    )
+# st.pydeck_chart(
+#     pdk.Deck(
+#         map_style=None,
+#         initial_view_state=ViewState,
+#         layers=[
+#             pdk.Layer(
+#                 "HexagonLayer",
+#                 data=df,
+#                 get_position="[Longitude, Latitude]",
+#                 get_elevation="traveler_count",
+#                 get_fill_color="[255, traveler_count, 100]",
+#                 radius=300,
+#                 elevation_scale=5,
+#                 elevation_range=[0, 100],
+#                 pickable=True,
+#                 extruded=True,
+#                 auto_highlight=True,
+#             ),
+#         ],
+#         tooltip = tooltip
+#     )
+# )
+
+layer = pdk.Layer(
+    "ScatterplotLayer",
+    df,
+    pickable=True,
+    opacity=0.8,
+    stroked=True,
+    filled=True,
+    radius_scale=6,
+    radius_min_pixels=1,
+    radius_max_pixels=100,
+    line_width_min_pixels=1,
+    get_position="[Longitude, Latitude]",
+    get_radius="traveler_count",
+    get_fill_color=[255, 140, 0],
+    get_line_color=[0, 0, 0],
 )
+
+
+# Render
+r = pdk.Deck(layers=[layer], initial_view_state=ViewState, tooltip={"text": "{name}\n{address}"})
+st.pydeck_chart(r)
