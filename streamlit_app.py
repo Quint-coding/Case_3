@@ -16,6 +16,17 @@ df = pd.read_csv('bestedatasetopoitbombaclat2.csv')
 
 st.sidebar.title('Navigatie')
 
+st.markdown(
+    """
+    <style>
+        [data-testid="stSidebar"] {
+            background-color: #20283E; /* Change this to your desired color */
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
