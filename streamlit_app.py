@@ -51,7 +51,7 @@ st.pydeck_chart(
                 "HexagonLayer",
                 data=df['traveler_count'],
                 get_position="[Longitude, Latitude]",
-                radius=200,
+                radius=100,
                 elevation_scale=5,
                 elevation_range=[0, 1000],
                 pickable=True,
