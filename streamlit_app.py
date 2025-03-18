@@ -67,7 +67,7 @@ tooltip = {
 
 layer = pdk.Layer(
     "HexagonLayer",
-    df,
+    data = df,
     get_position=["longitude", "latitude"],
     auto_highlight=True,
     elevation_scale=50,
