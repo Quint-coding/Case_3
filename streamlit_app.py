@@ -31,7 +31,7 @@ options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
 tooltip = {
-    "html": "<b>Busyness:</b> {busyness}",
+    "html": "<b>Busyness:</b> {traveler_count}",
     "style": {"backgroundColor": "steelblue", "color": "white"},
 }
 
