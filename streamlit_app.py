@@ -59,7 +59,7 @@ st.pydeck_chart(
                 auto_highlight=True,
             ),
         ],
-        tooltip = tooltip
+        # tooltip = tooltip
     )
 )
 
