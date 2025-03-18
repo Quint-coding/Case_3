@@ -51,7 +51,7 @@ st.pydeck_chart(
                 "HexagonLayer",
                 data=df,
                 get_position="[Longitude, Latitude]",
-                radius=100,
+                radius=200,
                 elevation_scale=5,
                 elevation_range=[0, 1000],
                 pickable=True,
@@ -59,7 +59,7 @@ st.pydeck_chart(
                 auto_highlight=True,
             ),
         ],
-        tooltip = tooltip
+        # tooltip = tooltip
     )
 )
 
