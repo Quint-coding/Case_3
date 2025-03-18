@@ -14,6 +14,11 @@ st.title("3D kaart van de fiets drukte op stations")
 
 df = pd.read_csv('bestedatasetopoitbombaclat2.csv')
 
+st.sidebar.title('Navigatie')
+
+options = st.sidebar.radio('Visualisaties',
+                           options =['Fietsdrukte kaart'])
+
 st.pydeck_chart(
     pdk.Deck(
         map_style=None,
