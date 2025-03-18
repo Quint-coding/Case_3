@@ -53,7 +53,7 @@ st.pydeck_chart(
                 get_position="[Longitude, Latitude]",
                 radius=1000,
                 elevation_scale=5,
-                elevation_range=[0, 1000],
+                elevation_range=[0, 100],
                 pickable=True,
                 extruded=True,
                 auto_highlight=True,
