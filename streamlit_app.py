@@ -35,12 +35,12 @@ options = st.sidebar.radio('Visualisaties',
 #     "style": {"backgroundColor": "steelblue", "color": "white"}
 # }
 
-ViewState = pdk.ViewState(
-            latitude=51.50853,
-            longitude=-0.12574,
-            zoom=11,
-            pitch=50,
-        )
+# ViewState = pdk.ViewState(
+#             latitude=51.50853,
+#             longitude=-0.12574,
+#             zoom=11,
+#             pitch=50,
+#         )
 
 # st.pydeck_chart(
 #     pdk.Deck(
@@ -65,19 +65,34 @@ ViewState = pdk.ViewState(
 #     )
 # )
 
-layer = pdk.Layer(
-    "GridLayer",
-    df,
-    pickable=True,
-    get_position="[Longitude, Latitude]",
-    extruded=True,
-    cell_size=200,
-    elevation_scale=4
+selected_date = st.slider("📅 Kies een dag:", min_value=df["Start date"].min(), max_value=df["Start date"].max(), value=df["Start date"].min())
+
+# 🔍 **Filter Data op Geselecteerde Dag**
+filtered_data = df[df["Start date"] == selected_date]
+
+heatmap_layer = pdk.Layer(
+    "HeatmapLayer",
+    data=filtered_data,
+    get_position=["Longitude", "Latitude"],
+    # get_weight="Traveler_Count",
+    radius_pixels=60,
+    intensity=1,
+    threshold=0.2,
 )
 
+# 📍 **Kaartweergave**
+view_state = pdk.ViewState(
+    latitude=filtered_data["Latitude"].mean(),
+    longitude=filtered_data["Longitude"].mean(),
+    zoom=12,
+    pitch=50
+)
 
-# Render
-r = pdk.Deck(layers=[layer], initial_view_state=ViewState, 
-             tooltip={"text": "Station: {Station}\nAantal reizigers: {traveler_count}"}
-             )
-st.pydeck_chart(r)
+# 🗺️ **Render de kaart**
+st.pydeck_chart(
+    pdk.Deck(
+        layers=[heatmap_layer],
+        initial_view_state=view_state,
+        tooltip={"html": "<b>Reizigers:</b> {Traveler_Count}", "style": {"backgroundColor": "steelblue", "color": "white"}}
+    )
+)
