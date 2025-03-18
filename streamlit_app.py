@@ -54,3 +54,9 @@ st.pydeck_chart(
         ],
     )
 )
+
+chart = pydeck.Deck(
+    point_layer,
+    initial_view_state=view_state,
+    tooltip={"text": "{Station}, \nDrukte: {Start date}"},
+)
