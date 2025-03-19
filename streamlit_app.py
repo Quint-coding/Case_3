@@ -100,7 +100,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
 
         # Display the weather data as a table
         st.write("### Weather Data")
-        st.dataframe(selected_row.style.format({'Date': '{selected_date}', 'Temperature (°C)': '{:.1f}', 'Wind Speed (km/h)': '{:.1f}', 'Rain (mL)': '{:.1f}'}))
+        st.dataframe(selected_row.style.format({'Temperature (°C)': '{:.1f}', 'Wind Speed (km/h)': '{:.1f}', 'Rain (mL)': '{:.1f}'}))
 
     else:
         st.write("No weather data available for the selected date.")
