@@ -50,26 +50,29 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+df['Start date'] = pd.to_datetime(df['Start date'])
+
+
 # Dropdown to select zone
-# selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].unique()))
+selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].unique()))
 
 # Dropdown to select date
-unique_dates = list(map(str, df['Start date'].unique()))
+unique_dates = list(map(str, df['Start date'].dt.date.unique()))
 selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
 
 # Filter data based on selections
 filtered_data = df.copy()
-# if selected_zone != 'All':
-#     filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
+if selected_zone != 'All':
+    filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
 if selected_date != 'All':
-    filtered_data = filtered_data[filtered_data['Start date'].astype(str) == selected_date]
+    filtered_data = filtered_data[filtered_data['Start date'].dt.date.astype(str) == selected_date]
 
 # Compute traveler count display
 displayed_traveler_count = filtered_data['traveler_count'].mean() if selected_date == 'All' else filtered_data['traveler_count'].sum()
 st.write(f"Traveler Count: {displayed_traveler_count:.2f}")
 
 # Ensure filtered data contains valid color mapping
-filtered_data['color'] = filtered_data['zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])
+filtered_data['color'] = filtered_data['Zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])
 
 
 ViewState = pdk.ViewState(
