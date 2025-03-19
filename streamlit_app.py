@@ -35,6 +35,13 @@ options = st.sidebar.radio('Visualisaties',
 #     "style": {"backgroundColor": "steelblue", "color": "white"}
 # }
 
+selected_zone = st.sidebar.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
+
+if selected_zone != 'All':
+    filtered_data = df[df['Zone'] == selected_zone]
+else:
+    filtered_data = df
+
 ViewState = pdk.ViewState(
             latitude=51.50853,
             longitude=-0.12574,
