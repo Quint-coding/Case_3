@@ -70,23 +70,15 @@ st.markdown("""
 # filtered_data['color'] = filtered_data['Zone'].map(zone_colors).fillna([255, 255, 255])
 
 # Dropdown to select zone
-selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].unique()))
+selected_zone = st.selectbox("Select Zone", ['All'] + sorted(data['zone'].unique()))
 
-# Ensure date column exists before processing
-unique_dates = list(map(str, df['date'].dt.date.unique())) if 'Start date' in df.columns else []
-
-# Dropdown to select date
-selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
-
-# Filter data based on selections
-filtered_data = df.copy()
+# Filter data based on selected zone
+filtered_data = data.copy()
 if selected_zone != 'All':
-    filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
-if selected_date != 'All':
-    filtered_data = filtered_data[filtered_data['Start date'].dt.date.astype(str) == selected_date]
+    filtered_data = filtered_data[filtered_data['zone'] == selected_zone]
 
 # Ensure filtered data contains valid color mapping
-filtered_data['color'] = filtered_data['Zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])  # Default to white if no match
+filtered_data['color'] = filtered_data['zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])
 
 ViewState = pdk.ViewState(
             latitude=51.50853,
