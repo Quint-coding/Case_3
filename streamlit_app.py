@@ -50,24 +50,43 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-selected_zone = st.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
+# selected_zone = st.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
 
-# selected_date = st.selectbox("Select Date", ['All'] + sorted(df['Start date'].dt.strftime('%Y-%m-%d').unique()))
+# # selected_date = st.selectbox("Select Date", ['All'] + sorted(df['Start date'].dt.strftime('%Y-%m-%d').unique()))
 
-# unique_dates = list(map(str, df['Start date'].dt.date.unique())) if 'Start date' in df.columns else []
+# # unique_dates = list(map(str, df['Start date'].dt.date.unique())) if 'Start date' in df.columns else []
 
-# # Dropdown to select date
-# selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
+# # # Dropdown to select date
+# # selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
 
 
-filtered_data = df.copy()
-if selected_zone != 'All':
-    filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
-# if selected_date != 'All':
-#     filtered_data = filtered_data[filtered_data['Start date'].dt.strftime('%Y-%m-%d') == selected_date]
+# filtered_data = df.copy()
+# if selected_zone != 'All':
+#     filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
+# # if selected_date != 'All':
+# #     filtered_data = filtered_data[filtered_data['Start date'].dt.strftime('%Y-%m-%d') == selected_date]
 
-df['color'] = df['Zone'].map(zone_colors)
+# df['color'] = df['Zone'].map(zone_colors)
 # filtered_data['color'] = filtered_data['Zone'].map(zone_colors).fillna([255, 255, 255])
+
+# Dropdown to select zone
+selected_zone = st.selectbox("Select Zone", ['All'] + sorted(data['zone'].unique()))
+
+# Ensure date column exists before processing
+unique_dates = list(map(str, data['date'].dt.date.unique())) if 'date' in data.columns else []
+
+# Dropdown to select date
+selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
+
+# Filter data based on selections
+filtered_data = data.copy()
+if selected_zone != 'All':
+    filtered_data = filtered_data[filtered_data['zone'] == selected_zone]
+if selected_date != 'All':
+    filtered_data = filtered_data[filtered_data['date'].dt.date.astype(str) == selected_date]
+
+# Ensure filtered data contains valid color mapping
+filtered_data['color'] = filtered_data['zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])  # Default to white if no match
 
 ViewState = pdk.ViewState(
             latitude=51.50853,
