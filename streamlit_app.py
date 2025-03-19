@@ -34,15 +34,6 @@ options = st.sidebar.radio('Visualisaties',
 #     "html": "<b>Station:</b> {Station}<br><b>Busyness:</b> {traveler_count}",
 #     "style": {"backgroundColor": "steelblue", "color": "white"}
 # }
-
-zone_colors = {
-    '1': [255, 0, 0],  # Red
-    '1,2' : [130, 130, 0],
-    '2': [0, 255, 0],  # Green
-    '2,3': [0, 130, 130],
-    '3': [0, 0, 255]   # Blue
-}
-
 st.markdown("""
     <style>
         div[data-baseweb="select"] > div {
@@ -52,15 +43,27 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-df['Start date'] = pd.to_datetime(df['Start date'])
+zone_colors = {
+    '1': [255, 0, 0],  # Red
+    '1,2' : [130, 130, 0],
+    '2': [0, 255, 0],  # Green
+    '2,3': [0, 130, 130],
+    '3': [0, 0, 255]   # Blue
+}
 
+df['Start date'] = pd.to_datetime(df['Start date'])
 
 # Dropdown to select zone
 selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].astype(str).unique()))
 
-# Dropdown to select date
-unique_dates = list(map(str, df['Start date'].dt.date.unique()))
-selected_date = st.slider("Select Date", ['All'] + sorted(unique_dates))
+# Slider to select date range
+min_date = df['Start date'].min().date()
+max_date = df['Start date'].max().date()
+selected_date = st.slider("Select Date", min_value=min_date, max_value=max_date, value=min_date)
+
+# # Dropdown to select date
+# unique_dates = list(map(str, df['Start date'].dt.date.unique()))
+# selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
 
 # Filter data based on selections
 filtered_data = df.copy()
