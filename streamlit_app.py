@@ -52,10 +52,12 @@ st.markdown("""
 
 selected_zone = st.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
 
+selected_date = st.selectbox("Select Date", ['All'] + sorted(df['Start date'].astype(str).unique()))
+
 if selected_zone != 'All':
     filtered_data = df[df['Zone'] == selected_zone]
-else:
-    filtered_data = df
+if selected_date != 'All':
+    filtered_data = filtered_data[filtered_data['Start date'].astype(str) == selected_date]
 
 filtered_data['color'] = filtered_data['Zone'].map(zone_colors)
 
