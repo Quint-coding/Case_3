@@ -91,7 +91,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
         
         # Rename columns for better display
         selected_row.rename(columns={
-            'Start Date': '{selected_date}',
+            '{selected_date}': 'Date',
             'tavg': 'Temperature (°C)',
             'wspd': 'Wind Speed (km/h)',
             'wdir': 'Wind Direction',
