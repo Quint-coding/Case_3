@@ -46,7 +46,10 @@ if page == "🏠 Home":
 # Visualization Page
 elif page == "📊 Fietsdrukte Visualisatie":
     st.title("📊 Fietsdrukte Visualisatie")
-    st.write("Interactieve weergave van de fietsdrukte bij stations.")
+    st.write("Interactieve weergave vanfietsdrukte bij stations.")
+
+    # Add your visualization code here
+    st.write("🚀 Visualisaties worden hier weergegeven.")
 
     ## start code voor kaart
     df = pd.read_csv('dataset_aangepast.csv')
