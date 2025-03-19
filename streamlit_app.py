@@ -63,13 +63,13 @@ with st.container():
     st.markdown('<div class="main">', unsafe_allow_html=True)
 
     # Title
-    st.markdown('<div class="title">🚲 Fietsdrukte Dashboard</div>', unsafe_allow_html=True)
+    st.markdown('<div class="title">🚲 Vervoerdrukte Dashboard</div>', unsafe_allow_html=True)
     
     # Subtitle
-    st.markdown('<div class="subtitle">Interactieve visualisaties van fietsdrukte bij stations.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subtitle">Interactieve visualisaties van drukte bij stations.</div>', unsafe_allow_html=True)
 
     # Optional image (replace with your own)
-    st.markdown('<div class="center"><img src="https://www.google.com/imgres?q=modern%20bicycle%20communte&imgurl=https%3A%2F%2Fimages.stockcake.com%2Fpublic%2Fd%2Fc%2F0%2Fdc093a70-8e92-4033-833a-04bdd52838ec_large%2Furban-biking-commute-stockcake.jpg&imgrefurl=https%3A%2F%2Fstockcake.com%2Fi%2Furban-biking-commute_862811_1051500&docid=T6GSjy4-IsrQ2M&tbnid=SPrkKlowkShmyM&vet=12ahUKEwiy8L6lrZaMAxWTgP0HHQJBESkQM3oECGIQAA..i&w=512&h=512&hcb=2&itg=1&ved=2ahUKEwiy8L6lrZaMAxWTgP0HHQJBESkQM3oECGIQAA" width="80%"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="center"><img src=fiets.jpg' width="80%"></div>', unsafe_allow_html=True)
 
     # Navigation button
     if st.button("Ga naar Visualisaties 🚀"):
