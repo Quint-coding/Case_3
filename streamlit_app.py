@@ -44,8 +44,8 @@ if page == "🏠 Home":
     """)
 
 # Visualization Page
-elif page == "📊 Fietsdrukte Visualisatie":
-    st.title("📊 Fietsdrukte Visualisatie")
+elif page == "🚲 Fietsdrukte Visualisatie":
+    st.title("🚲 Fietsdrukte Visualisatie")
     st.write("Interactieve weergave van fietsdrukte bij stations.")
 
 
