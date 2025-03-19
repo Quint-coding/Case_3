@@ -6,7 +6,7 @@ import pydeck as pdk
 st.title("3D kaart van de fiets drukte op stations")
 
 df = pd.read_csv('dataset_aangepast.csv')
-weather_df = pd.read_csv('weather_london.csv')
+weather_df = pd.read_csv('/Users/Quint/Desktop/Data science/Case 3/weather_london.csv')
 
 st.sidebar.title('Navigatie')
 
