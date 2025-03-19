@@ -41,6 +41,15 @@ zone_colors = {
     '3': [0, 0, 255]   # Blue
 }
 
+st.markdown("""
+    <style>
+        div[data-baseweb="select"] > div {
+            background-color: #333 !important;
+            color: white !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 selected_zone = st.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
 
 if selected_zone != 'All':
