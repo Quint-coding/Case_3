@@ -52,7 +52,13 @@ st.markdown("""
 
 selected_zone = st.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
 
-selected_date = st.selectbox("Select Date", ['All'] + sorted(df['Start date'].dt.strftime('%Y-%m-%d').unique()))
+# selected_date = st.selectbox("Select Date", ['All'] + sorted(df['Start date'].dt.strftime('%Y-%m-%d').unique()))
+
+unique_dates = list(map(str, data['date'].dt.date.unique())) if 'date' in data.columns else []
+
+# Dropdown to select date
+selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
+
 
 filtered_data = df.copy()
 if selected_zone != 'All':
