@@ -38,7 +38,7 @@ page = st.sidebar.radio("Ga naar", ["🏠 Home",
 
 # Home Page
 if page == "🏠 Home":
-    st.title("🚋 Vervoerdrukte Dashboard")
+    st.title("🚲 Fietsdrukte Dashboard")
     st.subheader("Welkom bij het interactieve vervoerdrukte dashboard!")
 
     st.write("""
