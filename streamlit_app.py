@@ -23,6 +23,9 @@ st.markdown(
 options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
+st.write(df[''])
+
+
 st.markdown("""
     <style>
         div[data-baseweb="select"] > div {
@@ -59,7 +62,7 @@ filtered_data = filtered_data[filtered_data['Start date'].dt.date == selected_da
 
 # Compute traveler count display
 displayed_traveler_count = filtered_data['traveler_count'].mean() if selected_date == 'All' else filtered_data['traveler_count'].sum()
-st.write(f"Traveler Count: {displayed_traveler_count:.2f}")
+st.write(f"Total raveler Count: {displayed_traveler_count:f}")
 
 # Ensure filtered data contains valid color mapping
 filtered_data['color'] = filtered_data['Zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])
@@ -93,16 +96,3 @@ r = pdk.Deck(layers=[layer],
              tooltip={"text": "Station: {Station}\nBusyness: {traveler_count}"})
 st.pydeck_chart(r)
 
-
-station_layer = pdk.Layer(
-    "ScatterplotLayer",
-    df,
-    pickable=True,
-    filled=True,
-    radius_scale=6,
-    get_position="[longitude, latitude]",
-    get_radius=5,
-    get_color=[255, 255, 255]  # Black for all stations
-)
-
-st.pydeck_chart(pdk.Deck(layers=[station_layer], initial_view_state=ViewState))
