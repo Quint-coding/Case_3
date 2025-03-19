@@ -56,18 +56,18 @@ def wind_direction(degrees):
     index = round(degrees / 45) % 8
     return directions[index]
 
-selected_row = df[df['Start Date'].dt.date == selected_date]
+selected_rows = df[df['Start Date'].dt.date == selected_date]
 
 # Ensure filtered data is not empty
-if not selected_row.empty:
+if not selected_rows.empty:
     # Select relevant weather columns (adjust column names if needed)
-    weather_table = selected_row[['Start Date', 'tavg', 'wspd', 'wdir']].head(1).copy()
+    selected_row = selected_rows.iloc[0:1].copy()
     
     # Convert wind direction to compass points
-    weather_table['wdir'] = weather_table['wdir'].apply(wind_direction)
+    selected_row['wdir'] = selected_row['wdir'].apply(wind_direction)
     
     # Rename columns for better display
-    weather_table.rename(columns={
+    selected_row.rename(columns={
         'Start Date': 'Date',
         'tavg': 'Temperature (°C)',
         'wspd': 'Wind Speed (km/h)',
@@ -76,7 +76,7 @@ if not selected_row.empty:
 
     # Display the weather data as a table
     st.write("### Weather Data")
-    st.dataframe(weather_table.style.format({'Temperature (°C)': '{:.1f}', 'Wind Speed (km/h)': '{:.1f}'}))
+    st.dataframe(selected_row.style.format({'Temperature (°C)': '{:.1f}', 'Wind Speed (km/h)': '{:.1f}'}))
 
 else:
     st.write("No weather data available for the selected date.")
@@ -111,9 +111,9 @@ layer = pdk.Layer(
     # opacity=0.8,
     # stroked=True,
     filled=True,
-    radius_scale=6,
+    radius_scale=5,
     radius_min_pixels=1,
-    radius_max_pixels=15,
+    radius_max_pixels=10,
     get_position="[Longitude, Latitude]",
     get_radius="traveler_count",
     get_color='color',
