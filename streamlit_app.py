@@ -3,6 +3,80 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 
+# Set page config for better layout
+st.set_page_config(page_title="Fietsdrukte Dashboard", page_icon="🚲", layout="wide")
+
+# Custom CSS for styling
+st.markdown("""
+    <style>
+        /* Center the title */
+        .title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        /* Background styling */
+        .main {
+            background: linear-gradient(to right, #20283E, #1E3A5F);
+            padding: 50px;
+            border-radius: 15px;
+        }
+
+        /* Center image */
+        .center {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        /* Button Styling */
+        .stButton>button {
+            width: 50%;
+            display: block;
+            margin: auto;
+            background-color: #FF4B4B;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .stButton>button:hover {
+            background-color: #CC3A3A;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Main container with styling
+with st.container():
+    st.markdown('<div class="main">', unsafe_allow_html=True)
+
+    # Title
+    st.markdown('<div class="title">🚲 Fietsdrukte Dashboard</div>', unsafe_allow_html=True)
+    
+    # Subtitle
+    st.markdown('<div class="subtitle">Interactieve visualisaties van fietsdrukte bij stations.</div>', unsafe_allow_html=True)
+
+    # Optional image (replace with your own)
+    st.markdown('<div class="center"><img src="https://source.unsplash.com/1600x500/?bicycle,city" width="80%"></div>', unsafe_allow_html=True)
+
+    # Navigation button
+    if st.button("Ga naar Visualisaties 🚀"):
+        st.switch_page("app.py")  # Update this with the correct file name
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
 st.title("3D kaart van de fiets drukte op stations")
 
 df = pd.read_csv('dataset_aangepast.csv')
