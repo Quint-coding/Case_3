@@ -37,7 +37,9 @@ options = st.sidebar.radio('Visualisaties',
 
 zone_colors = {
     '1': [255, 0, 0],  # Red
+    '1,2' : [130, 130, 0],
     '2': [0, 255, 0],  # Green
+    '2,3': [0, 130, 130],
     '3': [0, 0, 255]   # Blue
 }
 
@@ -58,7 +60,7 @@ selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].astype(s
 
 # Dropdown to select date
 unique_dates = list(map(str, df['Start date'].dt.date.unique()))
-selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
+selected_date = st.slider("Select Date", ['All'] + sorted(unique_dates))
 
 # Filter data based on selections
 filtered_data = df.copy()
