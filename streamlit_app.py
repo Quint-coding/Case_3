@@ -98,6 +98,8 @@ elif page == "🚲 Drukte Geo - Visualisatie":
             'prcp' : 'Rain (mL)'
         }, inplace=True)
 
+        selected_row['Date'] = pd.to_datetime(selected_row['Date']).dt.date
+
         # Display the weather data as a table
         st.write("### Weather Data")
         st.dataframe(selected_row.style.format({'Temperature (°C)': '{:.1f}', 'Wind Speed (km/h)': '{:.1f}', 'Rain (mL)': '{:.1f}'}))
