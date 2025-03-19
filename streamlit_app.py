@@ -84,7 +84,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
     # Ensure filtered data is not empty
     if not selected_rows.empty:
         # Select relevant weather columns (adjust column names if needed)
-        selected_row = selected_rows[['Start Date', 'tavg', 'wspd', 'wdir']].head(1).copy()
+        selected_row = selected_rows[['Start Date', 'tavg', 'wspd', 'wdir', 'prcp']].head(1).copy()
         
         # Convert wind direction to compass points
         selected_row['wdir'] = selected_row['wdir'].apply(wind_direction)
@@ -94,7 +94,8 @@ elif page == "🚲 Drukte Geo - Visualisatie":
             'Start Date': 'Date',
             'tavg': 'Temperature (°C)',
             'wspd': 'Wind Speed (km/h)',
-            'wdir': 'Wind Direction'
+            'wdir': 'Wind Direction',
+            'prcp' : 'Percipication (mL)'
         }, inplace=True)
 
         # Display the weather data as a table
