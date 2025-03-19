@@ -31,7 +31,7 @@ st.markdown(
 
 # Sidebar Navigation
 st.sidebar.title("📍 Navigatie")
-page = st.sidebar.radio("Ga naar", ["🏠 Home", "📊 Visualisaties"])
+page = st.sidebar.radio("Ga naar", ["🏠 Home", "📊 Fietsdrukte Visualisatie"])
 
 # Home Page
 if page == "🏠 Home":
@@ -46,10 +46,8 @@ if page == "🏠 Home":
 # Visualization Page
 elif page == "📊 Fietsdrukte Visualisatie":
     st.title("📊 Fietsdrukte Visualisatie")
-    st.write("Interactieve weergave vanfietsdrukte bij stations.")
+    st.write("Interactieve weergave van fietsdrukte bij stations.")
 
-    # Add your visualization code here
-    st.write("🚀 Visualisaties worden hier weergegeven.")
 
     ## start code voor kaart
     df = pd.read_csv('dataset_aangepast.csv')
