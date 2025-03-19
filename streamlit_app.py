@@ -54,7 +54,7 @@ df['Start date'] = pd.to_datetime(df['Start date'])
 
 
 # Dropdown to select zone
-selected_zone = st.selectbox("Select Zone", ['All'] + df['Zone'].unique())
+selected_zone = st.selectbox("Select Zone", ['All'] + str(df['Zone'].unique()))
 
 # Dropdown to select date
 unique_dates = list(map(str, df['Start date'].dt.date.unique()))
