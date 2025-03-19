@@ -3,21 +3,43 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 
-st.set_page_config(page_title="vervoerdrukte Dashboard", page_icon="🚲", layout="wide")
+st.set_page_config(page_title="Fietsdrukte Dashboard", page_icon="🚲", layout="wide")
 
-st.title("🚲 Fietsdrukte Dashboard")
-st.subheader("Welkom bij het interactieve fietsdrukte dashboard!")
+# Initialize session state for navigation
+if "page" not in st.session_state:
+    st.session_state.page = "home"  # Default to home page
 
-st.write("""
-Dit dashboard geeft inzicht in de drukte van fietsenstallingen op stations.
-Gebruik de navigatie aan de linkerzijde om naar verschillende visualisaties te gaan.
-""")
+# Function to switch pages
+def switch_page(page_name):
+    st.session_state.page = page_name
 
-# Button to go to the visualization page
-if st.button("Ga naar Visualisaties 🚀"):
-    st.switch_page("pages/visualisatie.py")  # This navigates to another page
-st.title("3D kaart van de fiets drukte op stations")
+# Home Page Content
+if st.session_state.page == "home":
+    st.title("🚲 Fietsdrukte Dashboard")
+    st.subheader("Welkom bij het interactieve fietsdrukte dashboard!")
 
+    st.write("""
+    Dit dashboard geeft inzicht in de drukte van fietsenstallingen op stations.
+    Klik op de knop hieronder om de visualisaties te bekijken.
+    """)
+
+    # Navigation Button
+    if st.button("Ga naar Visualisaties 🚀"):
+        switch_page("visualisatie")
+
+    # Display an image (optional)
+    st.image("https://source.unsplash.com/1600x500/?bicycle,city", use_column_width=True)
+
+# Visualization Page Content
+elif st.session_state.page == "visualisatie":
+    st.title("📊 Fietsdrukte Visualisaties")
+    st.write("Hier kun je de interactieve visualisaties bekijken van de fietsdrukte bij stations.")
+
+    # Back Button to go to Home Page
+    if st.button("🔙 Terug naar Home"):
+        switch_page("home")
+
+## start code voor kaart
 df = pd.read_csv('dataset_aangepast.csv')
 
 st.sidebar.title('Navigatie')
