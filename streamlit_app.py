@@ -57,7 +57,7 @@ def wind_direction(degrees):
     return directions[index]
 
 # Ensure filtered data is not empty
-if not df.empty:
+if not selected_date.empty:
     # Select relevant weather columns (adjust column names if needed)
     weather_table = df[['Start Date', 'tavg', 'wspd', 'wdir']].copy()
     
