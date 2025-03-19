@@ -46,7 +46,7 @@ if page == "🏠 Home":
     Gebruik de navigatie aan de linkerzijde om naar de visualisaties te gaan.
              
     Team 8:
-    Tammo van Leeuwen, Jorik Stavenuiter, Burhan Canbaz, Quint Klaassen
+    Tammo van Leeuwen, | Jorik Stavenuiter, /nBurhan Canbaz, Quint Klaassen
     """)
 
 # Visualization Page
