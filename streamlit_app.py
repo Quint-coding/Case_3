@@ -41,7 +41,7 @@ zone_colors = {
     '3': [0, 0, 255]   # Blue
 }
 
-selected_zone = st.sidebar.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
+selected_zone = st.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
 
 if selected_zone != 'All':
     filtered_data = df[df['Zone'] == selected_zone]
