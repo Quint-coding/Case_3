@@ -74,6 +74,21 @@ if not selected_rows.empty:
         'wdir': 'Wind Direction'
     }, inplace=True)
 
+    st.markdown("""
+        <style>
+        /* Style the header row */
+        thead th {
+            background-color: #333 !important;  /* Dark grey */
+            color: white !important;
+            text-align: center;
+        }
+        /* Center align table content */
+        tbody td {
+            text-align: center;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
     # Display the weather data as a table
     st.write("### Weather Data")
     st.dataframe(selected_row.style.format({'Temperature (°C)': '{:.1f}', 'Wind Speed (km/h)': '{:.1f}'}))
