@@ -51,18 +51,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Dropdown to select zone
-selected_zone = st.selectbox("Select Zone", ['All'] + sorted(data['zone'].unique()))
+selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].unique()))
 
 # Dropdown to select date
-unique_dates = list(map(str, data['date'].dt.date.unique()))
+unique_dates = list(map(str, df['Start date'].unique()))
 selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
 
 # Filter data based on selections
-filtered_data = data.copy()
+filtered_data = df.copy()
 if selected_zone != 'All':
-    filtered_data = filtered_data[filtered_data['zone'] == selected_zone]
+    filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
 if selected_date != 'All':
-    filtered_data = filtered_data[filtered_data['date'].dt.date.astype(str) == selected_date]
+    filtered_data = filtered_data[filtered_data['Start date'].astype(str) == selected_date]
 
 # Compute traveler count display
 displayed_traveler_count = filtered_data['traveler_count'].mean() if selected_date == 'All' else filtered_data['traveler_count'].sum()
