@@ -54,11 +54,10 @@ selected_zone = st.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
 
 selected_date = st.selectbox("Select Date", ['All'] + sorted(df['Start date'].astype(str).unique()))
 
-filtered_data = df.copy()
 if selected_zone != 'All':
-    filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
+    filtered_data = filtered_data[filtered_data['zone'] == selected_zone]
 if selected_date != 'All':
-    filtered_data = filtered_data[filtered_data['Start date'].dt.strftime('%Y-%m-%d') == selected_date]
+    filtered_data = filtered_data[filtered_data['Start date'].astype(str) == selected_date]
 
 filtered_data['color'] = filtered_data['Zone'].map(zone_colors)
 
