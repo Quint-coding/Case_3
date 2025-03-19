@@ -52,7 +52,7 @@ layer = pdk.Layer(
     filled=True,
     radius_scale=6,
     radius_min_pixels=1,
-    radius_max_pixels=100,
+    radius_max_pixels=10,
     line_width_min_pixels=1,
     get_position=["Longitude", "Latitude"],
     get_radius="traveler_count",
@@ -60,5 +60,7 @@ layer = pdk.Layer(
     get_line_color=[0, 0, 0],
 )
 
-r = pdk.Deck(layers=[layer], initial_view_state=ViewState, tooltip={"text": "Station: {Station}\nBusyness: {traveler_count}"})
+r = pdk.Deck(layers=[layer], 
+             initial_view_state=ViewState, 
+             tooltip={"text": "Station: {Station}\nBusyness: {traveler_count}"})
 st.pydeck_chart(r)
