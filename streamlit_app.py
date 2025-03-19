@@ -74,30 +74,6 @@ if not selected_rows.empty:
         'wdir': 'Wind Direction'
     }, inplace=True)
 
-    # Convert DataFrame to HTML with custom styling
-    table_html = f"""
-    <style>
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-            font-family: Arial, sans-serif;
-        }}
-        th {{
-            background-color: #333;  /* Dark grey header */
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }}
-        td {{
-            padding: 8px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }}
-    </style>
-    {selected_row.to_html(index=False, escape=False)}
-    """
-
-
     # Display the weather data as a table
     st.write("### Weather Data")
     st.dataframe(selected_row.style.format({'Temperature (°C)': '{:.1f}', 'Wind Speed (km/h)': '{:.1f}'}))
