@@ -32,9 +32,9 @@ st.markdown(
 # Sidebar Navigation
 st.sidebar.title("📍 Navigatie")
 page = st.sidebar.radio("Ga naar", ["🏠 Home", 
-                                    "🚲 Fietsdrukte Geo - Visualisatie", 
-                                    "🚲 Fietsdrukte over de dag", 
-                                    "🚲 Fietsdrukte Voorspellen"])
+                                    "🚲 Drukte Geo - Visualisatie", 
+                                    "🚲 Drukte over de dag", 
+                                    "🚲 Drukte Voorspellen"])
 
 # Home Page
 if page == "🏠 Home":
@@ -47,8 +47,8 @@ if page == "🏠 Home":
     """)
 
 # Visualization Page
-elif page == "🚲 Fietsdrukte Visualisatie":
-    st.title("🚲 Fietsdrukte Visualisatie")
+elif page == "🚲 Drukte Geo - Visualisatie":
+    st.title("🚲 Drukte Geo - Visualisatie")
     st.write("Interactieve weergave van fietsdrukte bij stations.")
 
 
@@ -147,10 +147,10 @@ elif page == "🚲 Fietsdrukte Visualisatie":
                 tooltip={"text": "Station: {Station}\nBusyness: {traveler_count}"})
     st.pydeck_chart(r)
 
-elif page == "🚲 Fietsdrukte over de dag":
-    st.title("🚲 Fietsdrukte over de dag")
+elif page == "🚲 Drukte over de dag":
+    st.title("🚲 Drukte over de dag")
     st.write("Interactieve weergave van fietsdrukte bij stations.")
 
-elif page == "🚲 Fietsdrukte Voorspellen":
-    st.title("🚲 Fietsdrukte Voorspellen")
+elif page == "🚲 Drukte Voorspellen":
+    st.title("🚲 Drukte Voorspellen")
     st.write("Interactieve weergave van fietsdrukte bij stations.")
