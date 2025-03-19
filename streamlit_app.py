@@ -50,11 +50,34 @@ min_date = df['Start Date'].min().date()
 max_date = df['Start Date'].max().date()
 selected_date = st.slider("Select Date", min_value=min_date, max_value=max_date, value=min_date)
 
+## Wheather info
+def wind_direction(degrees):
+    directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N']
+    index = round(degrees / 45) % 8
+    return directions[index]
+
+# Ensure filtered data is not empty
 if not df.empty:
-    weather_info = df.iloc[0]['tavg']  # Get weather data from the first row
-    st.write(f"On {selected_date}, the temperature was **{weather_info}**.")
+    # Select relevant weather columns (adjust column names if needed)
+    weather_table = df[['Start Date', 'tavg', 'wspd', 'wdir']].copy()
+    
+    # Convert wind direction to compass points
+    weather_table['wdir'] = weather_table['wdir'].apply(wind_direction)
+    
+    # Rename columns for better display
+    weather_table.rename(columns={
+        'Start Date': 'Date',
+        'tavg': 'Temperature (°C)',
+        'wspd': 'Wind Speed (km/h)',
+        'wdir': 'Wind Direction'
+    }, inplace=True)
+
+    # Display the weather data as a table
+    st.write("### Weather Data")
+    st.dataframe(weather_table.style.format({'Temperature (°C)': '{:.1f}', 'Wind Speed (km/h)': '{:.1f}'}))
+
 else:
-    st.write("No data available for the selected date.")
+    st.write("No weather data available for the selected date.")
 
 
 # Filter data based on selections
