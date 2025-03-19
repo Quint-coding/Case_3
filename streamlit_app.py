@@ -12,7 +12,7 @@ import pydeck as pdk
 
 st.title("3D kaart van de fiets drukte op stations")
 
-df = pd.read_csv('bestedatasetopoitbombaclat2.csv')
+df = pd.read_csv('dataset_aangepast.csv')
 
 st.sidebar.title('Navigatie')
 
