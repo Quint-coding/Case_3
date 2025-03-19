@@ -61,7 +61,7 @@ selected_row = df[df['Start Date'].dt.date == selected_date]
 # Ensure filtered data is not empty
 if not selected_row.empty:
     # Select relevant weather columns (adjust column names if needed)
-    weather_table = selected_row[['Start Date', 'tavg', 'wspd', 'wdir']].copy()
+    weather_table = selected_row[['Start Date', 'tavg', 'wspd', 'wdir']].head(1).copy()
     
     # Convert wind direction to compass points
     weather_table['wdir'] = weather_table['wdir'].apply(wind_direction)
