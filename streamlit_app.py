@@ -6,6 +6,7 @@ import pydeck as pdk
 st.title("3D kaart van de fiets drukte op stations")
 
 df = pd.read_csv('dataset_aangepast.csv')
+weather_df = pd.read_csv('weather_london.csv')
 
 st.sidebar.title('Navigatie')
 
@@ -42,6 +43,7 @@ zone_colors = {
 }
 
 df['Start date'] = pd.to_datetime(df['Start date'])
+weather_df['Date'] = pd.to_datetime(weather_df['Date'])
 
 # Dropdown to select zone
 selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].astype(str).unique()))
@@ -57,6 +59,17 @@ if selected_zone != 'All':
     filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
 filtered_data = filtered_data[filtered_data['Start date'].dt.date == selected_date]
 
+
+## Weer data weergeven o.b.v geselcteerde datum
+selected_weather = weather_df[weather_df['Date'].dt.date == selected_date]
+
+if not selected_weather.empty:
+    temperature = selected_weather['tavg'].values[0]
+    wind_richting = selected_weather['wdir'].values[0]
+    precipitation = selected_weather['prcp'].values[0]
+    st.write(f"🌡️ Average temperature: {temperature}°C | ☁️ Wind direction: {wind_richting} | Precipitation {precipitation}")
+else:
+    st.write("⚠️ No weather data available for this date.")
 
 # Compute traveler count display
 displayed_traveler_count = filtered_data['traveler_count'].mean() if selected_date == 'All' else filtered_data['traveler_count'].sum()
