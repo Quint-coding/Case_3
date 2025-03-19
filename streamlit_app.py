@@ -35,21 +35,18 @@ page = st.sidebar.radio("Ga naar", ["🏠 Home", "📊 Visualisaties"])
 
 # Home Page
 if page == "🏠 Home":
-    st.title("🚲 Fietsdrukte Dashboard")
-    st.subheader("Welkom bij het interactieve fietsdrukte dashboard!")
+    st.title("🚲 Vervoerdrukte Dashboard")
+    st.subheader("Welkom bij het interactieve vervoerdrukte dashboard!")
 
     st.write("""
-    Dit dashboard geeft inzicht in de drukte van fietsenstallingen bij stations.
+    Dit dashboard geeft inzicht in de drukte bij stations.
     Gebruik de navigatie aan de linkerzijde om naar de visualisaties te gaan.
     """)
 
 # Visualization Page
-elif page == "📊 Visualisaties":
-    st.title("📊 Fietsdrukte Visualisaties")
-    st.write("Hier kun je de interactieve visualisaties bekijken van de fietsdrukte bij stations.")
-
-    # Add your visualization code here
-    st.write("🚀 Visualisaties worden hier weergegeven.")
+elif page == "📊 Fietsdrukte Visualisatie":
+    st.title("📊 Fietsdrukte Visualisatie")
+    st.write("Interactieve weergave van de fietsdrukte bij stations.")
 
     ## start code voor kaart
     df = pd.read_csv('dataset_aangepast.csv')
