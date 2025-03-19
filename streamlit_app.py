@@ -67,7 +67,7 @@ if selected_zone != 'All':
 #     filtered_data = filtered_data[filtered_data['Start date'].dt.strftime('%Y-%m-%d') == selected_date]
 
 df['color'] = df['Zone'].map(zone_colors)
-filtered_data['color'] = filtered_data['Zone'].map(zone_colors).fillna([255, 255, 255])
+# filtered_data['color'] = filtered_data['Zone'].map(zone_colors).fillna([255, 255, 255])
 
 ViewState = pdk.ViewState(
             latitude=51.50853,
