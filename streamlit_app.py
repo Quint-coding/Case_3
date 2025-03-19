@@ -50,6 +50,48 @@ min_date = df['Start Date'].min().date()
 max_date = df['Start Date'].max().date()
 selected_date = st.slider("Select Date", min_value=min_date, max_value=max_date, value=min_date)
 
+# Filter data based on selections
+filtered_data = df.copy()
+if selected_zone != 'All':
+    filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
+filtered_data = filtered_data[filtered_data['Start Date'].dt.date == selected_date]
+
+# Compute traveler count display
+displayed_traveler_count = filtered_data['traveler_count'].mean() if selected_date == 'All' else filtered_data['traveler_count'].sum()
+st.write(f"Total raveler Count: {displayed_traveler_count:.0f}")
+
+# Ensure filtered data contains valid color mapping
+filtered_data['color'] = filtered_data['Zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])
+
+
+ViewState = pdk.ViewState(
+            latitude=51.50853,
+            longitude=-0.12574,
+            zoom=11,
+            pitch=50,
+        )
+
+
+layer = pdk.Layer(
+    "ScatterplotLayer",
+    filtered_data,
+    pickable=True,
+    # opacity=0.8,
+    # stroked=True,
+    filled=True,
+    radius_scale=5,
+    radius_min_pixels=1,
+    radius_max_pixels=10,
+    get_position="[Longitude, Latitude]",
+    get_radius="traveler_count",
+    get_color='color',
+)
+
+r = pdk.Deck(layers=[layer], 
+             initial_view_state=ViewState, 
+             tooltip={"text": "Station: {Station}\nBusyness: {traveler_count}"})
+st.pydeck_chart(r)
+
 ## Wheather info
 def wind_direction(degrees):
     directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N']
@@ -95,47 +137,3 @@ if not selected_rows.empty:
 
 else:
     st.write("No weather data available for the selected date.")
-
-
-# Filter data based on selections
-filtered_data = df.copy()
-if selected_zone != 'All':
-    filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
-filtered_data = filtered_data[filtered_data['Start Date'].dt.date == selected_date]
-
-# Compute traveler count display
-displayed_traveler_count = filtered_data['traveler_count'].mean() if selected_date == 'All' else filtered_data['traveler_count'].sum()
-st.write(f"Total raveler Count: {displayed_traveler_count:.0f}")
-
-# Ensure filtered data contains valid color mapping
-filtered_data['color'] = filtered_data['Zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])
-
-
-ViewState = pdk.ViewState(
-            latitude=51.50853,
-            longitude=-0.12574,
-            zoom=11,
-            pitch=50,
-        )
-
-
-layer = pdk.Layer(
-    "ScatterplotLayer",
-    filtered_data,
-    pickable=True,
-    # opacity=0.8,
-    # stroked=True,
-    filled=True,
-    radius_scale=5,
-    radius_min_pixels=1,
-    radius_max_pixels=10,
-    get_position="[Longitude, Latitude]",
-    get_radius="traveler_count",
-    get_color='color',
-)
-
-r = pdk.Deck(layers=[layer], 
-             initial_view_state=ViewState, 
-             tooltip={"text": "Station: {Station}\nBusyness: {traveler_count}"})
-st.pydeck_chart(r)
-
