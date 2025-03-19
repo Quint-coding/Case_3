@@ -44,6 +44,9 @@ if page == "🏠 Home":
     st.write("""
     Dit dashboard geeft inzicht in de drukte bij stations.
     Gebruik de navigatie aan de linkerzijde om naar de visualisaties te gaan.
+             
+    Team 8:
+    Tammo van Leeuwen, Jorik Stavenuiter, Burhan Canbaz, Quint Klaassen
     """)
 
 # Visualization Page
