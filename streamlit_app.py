@@ -4,7 +4,7 @@ import numpy as np
 import pydeck as pdk
 
 
-# Set page config
+# Set page configuration
 st.set_page_config(page_title="Fietsdrukte Dashboard", page_icon="🚲", layout="wide")
 
 # Custom CSS to style the sidebar (dark theme)
@@ -31,7 +31,10 @@ st.markdown(
 
 # Sidebar Navigation
 st.sidebar.title("📍 Navigatie")
-page = st.sidebar.radio("Ga naar", ["🏠 Home", "🚲 Fietsdrukte Visualisatie"])
+page = st.sidebar.radio("Ga naar", ["🏠 Home", 
+                                    "🚲 Fietsdrukte Geo - Visualisatie", 
+                                    "🚲 Fietsdrukte over de dag", 
+                                    "🚲 Fietsdrukte Voorspellen"])
 
 # Home Page
 if page == "🏠 Home":
@@ -144,3 +147,10 @@ elif page == "🚲 Fietsdrukte Visualisatie":
                 tooltip={"text": "Station: {Station}\nBusyness: {traveler_count}"})
     st.pydeck_chart(r)
 
+elif page == "🚲 Fietsdrukte over de dag":
+    st.title("🚲 Fietsdrukte over de dag")
+    st.write("Interactieve weergave van fietsdrukte bij stations.")
+
+elif page == "🚲 Fietsdrukte Voorspellen":
+    st.title("🚲 Fietsdrukte Voorspellen")
+    st.write("Interactieve weergave van fietsdrukte bij stations.")
