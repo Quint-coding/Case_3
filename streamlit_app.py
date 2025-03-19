@@ -48,6 +48,8 @@ if selected_zone != 'All':
 else:
     filtered_data = df
 
+filtered_data['color'] = filtered_data['zone'].map(zone_colors)
+
 ViewState = pdk.ViewState(
             latitude=51.50853,
             longitude=-0.12574,
@@ -58,7 +60,7 @@ ViewState = pdk.ViewState(
 
 layer = pdk.Layer(
     "ScatterplotLayer",
-    df,
+    filtered_data,
     pickable=True,
     opacity=0.8,
     stroked=True,
@@ -69,8 +71,7 @@ layer = pdk.Layer(
     line_width_min_pixels=1,
     get_position="[Longitude, Latitude]",
     get_radius="traveler_count",
-    get_fill_color=[255, 140, 0],
-    get_line_color=[0, 0, 0],
+    get_color=[255, 140, 0],
 )
 
 r = pdk.Deck(layers=[layer], 
