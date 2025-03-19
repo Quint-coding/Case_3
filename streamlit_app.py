@@ -46,7 +46,7 @@ if page == "🏠 Home":
     Gebruik de navigatie aan de linkerzijde om naar de visualisaties te gaan.
              
     Team 8:
-    Tammo van Leeuwen, | Jorik Stavenuiter, /nBurhan Canbaz, Quint Klaassen
+    Tammo van Leeuwen<br> Jorik Stavenuiter<br> Burhan Canbaz<br> Quint Klaassen
     """)
 
 # Visualization Page
@@ -156,6 +156,8 @@ elif page == "🚲 Drukte Geo - Visualisatie":
 elif page == "🚲 Drukte over de dag":
     st.title("🚲 Drukte over de dag")
     st.write("Interactieve weergave van fietsdrukte bij stations.")
+
+
 
 elif page == "🚲 Drukte Voorspellen":
     st.title("🚲 Drukte Voorspellen")
