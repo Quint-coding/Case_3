@@ -74,20 +74,29 @@ if not selected_rows.empty:
         'wdir': 'Wind Direction'
     }, inplace=True)
 
-    st.markdown("""
-        <style>
-        /* Style the header row */
-        thead th {
-            background-color: yellow !important;  /* Dark grey */
-            color: white !important;
+    # Convert DataFrame to HTML with custom styling
+    table_html = f"""
+    <style>
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }}
+        th {{
+            background-color: #333;  /* Dark grey header */
+            color: white;
+            padding: 10px;
             text-align: center;
-        }
-        /* Center align table content */
-        tbody td {
+        }}
+        td {{
+            padding: 8px;
             text-align: center;
-        }
-        </style>
-        """, unsafe_allow_html=True)
+            border-bottom: 1px solid #ddd;
+        }}
+    </style>
+    {selected_row.to_html(index=False, escape=False)}
+    """
+
 
     # Display the weather data as a table
     st.write("### Weather Data")
