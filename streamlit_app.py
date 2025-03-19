@@ -31,11 +31,11 @@ st.markdown(
 
 # Sidebar Navigation
 st.sidebar.title("📍 Navigatie")
-page = st.sidebar.radio("Ga naar", ["🏠 Home", "📊 Fietsdrukte Visualisatie"])
+page = st.sidebar.radio("Ga naar", ["🏠 Home", "🚲 Fietsdrukte Visualisatie"])
 
 # Home Page
 if page == "🏠 Home":
-    st.title("🚲 Vervoerdrukte Dashboard")
+    st.title("🚋 Vervoerdrukte Dashboard")
     st.subheader("Welkom bij het interactieve vervoerdrukte dashboard!")
 
     st.write("""
