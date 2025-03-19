@@ -42,22 +42,22 @@ zone_colors = {
     '3': [0, 0, 255]   # Blue
 }
 
-df['Start date'] = pd.to_datetime(df['Start date'])
+df['Start Date'] = pd.to_datetime(df['Start Date'])
 weather_df['Date'] = pd.to_datetime(weather_df['Date'])
 
 # Dropdown to select zone
 selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].astype(str).unique()))
 
 # Slider to select date range
-min_date = df['Start date'].min().date()
-max_date = df['Start date'].max().date()
+min_date = df['Start Date'].min().date()
+max_date = df['Start Date'].max().date()
 selected_date = st.slider("Select Date", min_value=min_date, max_value=max_date, value=min_date)
 
 # Filter data based on selections
 filtered_data = df.copy()
 if selected_zone != 'All':
     filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
-filtered_data = filtered_data[filtered_data['Start date'].dt.date == selected_date]
+filtered_data = filtered_data[filtered_data['Start Date'].dt.date == selected_date]
 
 
 ## Weer data weergeven o.b.v geselcteerde datum
