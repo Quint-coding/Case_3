@@ -78,7 +78,7 @@ if not selected_rows.empty:
         <style>
         /* Style the header row */
         thead th {
-            background-color: #333 !important;  /* Dark grey */
+            background-color: #1d2327 !important;  /* Dark grey */
             color: white !important;
             text-align: center;
         }
