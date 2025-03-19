@@ -54,7 +54,7 @@ selected_zone = st.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
 
 # selected_date = st.selectbox("Select Date", ['All'] + sorted(df['Start date'].dt.strftime('%Y-%m-%d').unique()))
 
-unique_dates = list(map(str, data['date'].dt.date.unique())) if 'date' in data.columns else []
+unique_dates = list(map(str, df['date'].dt.date.unique())) if 'date' in df.columns else []
 
 # Dropdown to select date
 selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
