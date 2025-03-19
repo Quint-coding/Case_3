@@ -35,6 +35,12 @@ options = st.sidebar.radio('Visualisaties',
 #     "style": {"backgroundColor": "steelblue", "color": "white"}
 # }
 
+zone_colors = {
+    '1': [255, 0, 0],  # Red
+    '2': [0, 255, 0],  # Green
+    '3': [0, 0, 255]   # Blue
+}
+
 selected_zone = st.sidebar.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
 
 if selected_zone != 'All':
