@@ -3,69 +3,39 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 
+
+# Set page config
 st.set_page_config(page_title="Fietsdrukte Dashboard", page_icon="🚲", layout="wide")
 
-# Initialize session state for navigation
-if "page" not in st.session_state:
-    st.session_state.page = "home"  # Default to home page
+# Sidebar Navigation
+st.sidebar.title("📍 Navigatie")
+page = st.sidebar.radio("Ga naar", ["🏠 Home", "📊 Visualisaties"])
 
-# Function to switch pages
-def switch_page(page_name):
-    st.session_state.page = page_name
-
-# Home Page Content
-if st.session_state.page == "home":
+# Home Page
+if page == "🏠 Home":
     st.title("🚲 Fietsdrukte Dashboard")
     st.subheader("Welkom bij het interactieve fietsdrukte dashboard!")
 
     st.write("""
-    Dit dashboard geeft inzicht in de drukte van fietsenstallingen op stations.
-    Klik op de knop hieronder om de visualisaties te bekijken.
+    Dit dashboard geeft inzicht in de drukte van fietsenstallingen bij stations.
+    Gebruik de navigatie aan de linkerzijde om naar de visualisaties te gaan.
     """)
 
-    # Navigation Button
-    if st.button("Ga naar Visualisaties 🚀"):
-        switch_page("visualisatie")
-
-    # Display an image (optional)
+    # Optional: Add an image
     st.image("https://source.unsplash.com/1600x500/?bicycle,city", use_column_width=True)
 
-# Visualization Page Content
-elif st.session_state.page == "visualisatie":
+# Visualization Page
+elif page == "📊 Visualisaties":
     st.title("📊 Fietsdrukte Visualisaties")
     st.write("Hier kun je de interactieve visualisaties bekijken van de fietsdrukte bij stations.")
 
-    # Back Button to go to Home Page
-    if st.button("🔙 Terug naar Home"):
-        switch_page("home")
+    # Add your visualization code here
+    st.write("🚀 Visualisaties worden hier weergegeven.")
+
 
 ## start code voor kaart
 df = pd.read_csv('dataset_aangepast.csv')
 
-st.sidebar.title('Navigatie')
-
-st.markdown(
-    """
-    <style>
-        [data-testid="stSidebar"] {
-            background-color: #20283E; /* Change this to your desired color */
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-options = st.sidebar.radio('Visualisaties',
-                           options =['Fietsdrukte kaart'])
-
-st.markdown("""
-    <style>
-        div[data-baseweb="select"] > div {
-            background-color: #333 !important;
-            color: white !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 zone_colors = {
     '1': [255, 0, 0],  # Red
