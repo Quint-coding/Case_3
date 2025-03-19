@@ -51,7 +51,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Dropdown to select zone
-selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].unique()))
+# selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].unique()))
 
 # Dropdown to select date
 unique_dates = list(map(str, df['Start date'].unique()))
