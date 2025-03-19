@@ -71,7 +71,7 @@ layer = pdk.Layer(
     line_width_min_pixels=1,
     get_position="[Longitude, Latitude]",
     get_radius="traveler_count",
-    get_color=[255, 140, 0],
+    get_color='color',
 )
 
 r = pdk.Deck(layers=[layer], 
