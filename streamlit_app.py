@@ -23,8 +23,6 @@ st.markdown(
 options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
-st.write(df[''])
-
 
 st.markdown("""
     <style>
@@ -62,7 +60,7 @@ filtered_data = filtered_data[filtered_data['Start date'].dt.date == selected_da
 
 # Compute traveler count display
 displayed_traveler_count = filtered_data['traveler_count'].mean() if selected_date == 'All' else filtered_data['traveler_count'].sum()
-st.write(f"Total raveler Count: {displayed_traveler_count:f}")
+st.write(f"Total raveler Count: {displayed_traveler_count:.2f}")
 
 # Ensure filtered data contains valid color mapping
 filtered_data['color'] = filtered_data['Zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])
