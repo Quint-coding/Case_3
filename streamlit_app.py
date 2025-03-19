@@ -48,7 +48,7 @@ if selected_zone != 'All':
 else:
     filtered_data = df
 
-filtered_data['color'] = filtered_data['zone'].map(zone_colors)
+filtered_data['color'] = filtered_data['Zone'].map(zone_colors)
 
 ViewState = pdk.ViewState(
             latitude=51.50853,
