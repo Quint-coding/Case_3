@@ -52,12 +52,13 @@ st.markdown("""
 
 selected_zone = st.selectbox("Select Zone", ['All'] + list(zone_colors.keys()))
 
-selected_date = st.selectbox("Select Date", ['All'] + sorted(df['Start date'].astype(str).unique()))
+selected_date = st.selectbox("Select Date", ['All'] + sorted(df['Start date'].dt.strftime('%Y-%m-%d').unique()))
 
+filtered_data = df.copy()
 if selected_zone != 'All':
-    filtered_data = df[df['Zone'] == selected_zone]
+    filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
 if selected_date != 'All':
-    filtered_data = filtered_data[filtered_data['Start date'].astype(str) == selected_date]
+        filtered_data = filtered_data[filtered_data['date'].dt.strftime('%Y-%m-%d') == selected_date]
 
 filtered_data['color'] = filtered_data['Zone'].map(zone_colors)
 
@@ -78,7 +79,7 @@ layer = pdk.Layer(
     filled=True,
     radius_scale=6,
     radius_min_pixels=1,
-    radius_max_pixels=10,
+    radius_max_pixels=15,
     get_position="[Longitude, Latitude]",
     get_radius="traveler_count",
     get_color='color',
