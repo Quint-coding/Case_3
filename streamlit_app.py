@@ -3,13 +3,6 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 
-# np.random.seed(20)
-
-# chart_data = pd.DataFrame(
-#     np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-#     columns=["lat", "lon"],
-# )
-
 st.title("3D kaart van de fiets drukte op stations")
 
 df = pd.read_csv('dataset_aangepast.csv')
@@ -30,10 +23,6 @@ st.markdown(
 options = st.sidebar.radio('Visualisaties',
                            options =['Fietsdrukte kaart'])
 
-# tooltip = {
-#     "html": "<b>Station:</b> {Station}<br><b>Busyness:</b> {traveler_count}",
-#     "style": {"backgroundColor": "steelblue", "color": "white"}
-# }
 st.markdown("""
     <style>
         div[data-baseweb="select"] > div {
@@ -60,17 +49,6 @@ selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].astype(s
 min_date = df['Start date'].min().date()
 max_date = df['Start date'].max().date()
 selected_date = st.slider("Select Date", min_value=min_date, max_value=max_date, value=min_date)
-
-# # Dropdown to select date
-# unique_dates = list(map(str, df['Start date'].dt.date.unique()))
-# selected_date = st.selectbox("Select Date", ['All'] + sorted(unique_dates))
-
-# Filter data based on selections
-# filtered_data = df.copy()
-# if selected_zone != 'All':
-#     filtered_data = filtered_data[filtered_data['Zone'] == selected_zone]
-# if selected_date != 'All':
-#     filtered_data = filtered_data[filtered_data['Start date'].dt.date.astype(str) == selected_date]
 
 # Filter data based on selections
 filtered_data = df.copy()
@@ -114,3 +92,19 @@ r = pdk.Deck(layers=[layer],
              initial_view_state=ViewState, 
              tooltip={"text": "Station: {Station}\nBusyness: {traveler_count}"})
 st.pydeck_chart(r)
+
+
+station_layer = pdk.Layer(
+    "ScatterplotLayer",
+    df,
+    pickable=True,
+    filled=True,
+    radius_scale=6,
+    radius_min_pixels=3,
+    radius_max_pixels=6,
+    get_position="[longitude, latitude]",
+    get_radius=5,
+    get_color=[255, 255, 255]  # Black for all stations
+)
+
+st.pydeck_chart(pdk.Deck(layers=[station_layer], initial_view_state=ViewState))
