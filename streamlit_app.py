@@ -91,11 +91,11 @@ elif page == "🚲 Drukte Geo - Visualisatie":
         
         # Rename columns for better display
         selected_row.rename(columns={
-            'Start Date': 'Date',
+            'Start Date': '{selected_date}',
             'tavg': 'Temperature (°C)',
             'wspd': 'Wind Speed (km/h)',
             'wdir': 'Wind Direction',
-            'prcp' : 'Percipication (mL)'
+            'prcp' : 'Rain (mL)'
         }, inplace=True)
 
         # Display the weather data as a table
