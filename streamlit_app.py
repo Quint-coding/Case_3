@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pydeck as pdk
-import statsmodels.api as sm
+import statsmodels as sm
 
 # import plotly.express as px
 # import plotly.graph_objects as go
