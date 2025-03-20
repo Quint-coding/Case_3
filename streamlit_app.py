@@ -83,8 +83,8 @@ elif page == "🚲 Drukte Geo - Visualisatie":
     selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].astype(str).unique()))
 
     # Slider to select date range
-    min_date = df['Start Date'].min().date()
-    max_date = df['Start Date'].max().date()
+    min_date = df['Start Date'].min()
+    max_date = df['Start Date'].max()
     selected_date = st.slider("Select Date", min_value=min_date, max_value=max_date, value=min_date)
 
     ## Wheather info
