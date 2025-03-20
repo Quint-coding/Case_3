@@ -43,7 +43,6 @@ page = st.sidebar.radio("Ga naar", ["🏠 Home",
                                     "🚲 Drukte over de dag", 
                                     "🚲 Drukte Voorspellen"])
 
-st.write(f"Je hebt gekozen: {option}")
 # Home Page
 if page == "🏠 Home":
     st.title("🚲 Fietsdrukte Dashboard")
