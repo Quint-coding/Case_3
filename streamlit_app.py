@@ -218,3 +218,65 @@ elif page == "🚲 Drukte over de dag":
 elif page == "🚲 Drukte Voorspellen":
     st.title("🚲 Drukte Voorspellen")
     st.write("Interactieve weergave van fietsdrukte bij stations.")
+
+    # Data inladen
+    df_grouped = pd.read_csv("processed_data.csv")
+    
+    # Selecteer een dag
+    dagen = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    dag = st.selectbox("Selecteer een dag:", dagen)
+    
+    # Selecteer een uur
+    uur = st.slider("Selecteer een uur:", min_value=0, max_value=23, value=12)
+    
+    # Weer aanpassen
+    tavg = st.number_input("Gemiddelde temperatuur (°C)", min_value=-10.0, max_value=40.0, value=15.0)
+    prcp = st.number_input("Neerslag (mm)", min_value=0.0, max_value=50.0, value=0.0)
+    
+    # Zoek de basisvoorspelling op
+    basis_rental = df_grouped[(df_grouped["dag_van_de_week_start"] == dag) & (df_grouped["uur"] == uur)]
+    
+    if basis_rental.empty:
+        st.warning("Geen data beschikbaar voor deze selectie.")
+    else:
+        gem_rentals = basis_rental["gem_rentals"].values[0]
+        tavg_mean = df_grouped["tavg"].mean()
+    
+        # Kwadratische correctie toepassen
+        weercorrectie = (tavg / tavg_mean) ** 2 * (1 - (prcp / 10) ** 2)
+    
+        # Voorspelling berekenen en nooit onder 0 laten komen
+        voorspelling = max(0, gem_rentals * weercorrectie)
+    
+        st.subheader(f"📊 Geschat aantal verhuurde fietsen: {int(voorspelling)}")
+    
+    # Filter de data: Alleen Duration < 30.000
+    df_filtered = df[df['Duration'] < 3600]/3600
+    
+    # Definieer onafhankelijke en afhankelijke variabele
+    X = df_filtered[['uur']]
+    y = df_filtered['Duration']
+    
+    # Voeg een constante toe voor de OLS-regressie
+    X = sm.add_constant(X)
+    
+    # Voer de OLS-regressie uit
+    model = sm.OLS(y, X).fit()
+    
+    # Maak de voorspellingen
+    df_filtered['Predicted_Duration'] = model.predict(X)
+    
+    # Plot de resultaten
+    plt.figure(figsize=(10, 6))
+    plt.scatter(df_filtered['uur'], df_filtered['Duration'], color='blue', alpha=0.5, label='Data')
+    plt.plot(df_filtered['uur'], df_filtered['Predicted_Duration'], color='red', label='OLS Regressielijn')
+    
+    # Labels en titel
+    plt.xlabel('Uur van de dag')
+    plt.ylabel('Duur van de rit (seconden)')
+    plt.title('OLS Regressie: Uur vs Duur van de Rit')
+    plt.legend()
+    plt.show()
+    
+    # Print de regressie samenvatting
+    model.summary()
