@@ -29,7 +29,7 @@ st.markdown(
         [data-testid="stSidebar"] h6, 
         [data-testid="stSidebar"] label, 
         [data-testid="stSidebar"] p {
-            color: red !important;  /* White text */
+            color: white !important;  /* White text */
         }
     </style>
     """,
@@ -42,6 +42,8 @@ page = st.sidebar.radio("Ga naar", ["🏠 Home",
                                     "🚲 Drukte Geo - Visualisatie", 
                                     "🚲 Drukte over de dag", 
                                     "🚲 Drukte Voorspellen"])
+
+st.markdown(     """     <style>         div[role="listbox"] ul {             background-color: lightblue;         }     </style>     """,     unsafe_allow_html=True, ) option = st.selectbox("Kies een optie", ["Optie 1", "Optie 2", "Optie 3"])
 
 # Home Page
 if page == "🏠 Home":
