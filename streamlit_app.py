@@ -65,7 +65,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
 
 
     ## start code voor kaart
-    df = pd.read_csv("dataset_aangepast.csv")
+    df = pd.read_csv("geo_drukte.csv.csv")
 
     zone_colors = {
         '1': [255, 0, 0],  # Red
