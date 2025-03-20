@@ -29,7 +29,7 @@ st.markdown(
         [data-testid="stSidebar"] h6, 
         [data-testid="stSidebar"] label, 
         [data-testid="stSidebar"] p {
-            color: grey !important;  /* White text */
+            color: red !important;  /* White text */
         }
     </style>
     """,
