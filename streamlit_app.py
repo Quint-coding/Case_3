@@ -43,21 +43,6 @@ page = st.sidebar.radio("Ga naar", ["🏠 Home",
                                     "🚲 Drukte over de dag", 
                                     "🚲 Drukte Voorspellen"])
 
-st.markdown(
-    """
-    <style>
-        /* Target the dropdown options */
-        div[data-testid="stSelectbox"] div[role="listbox"] {
-            background-color: lightblue !important;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Create the selectbox
-option = st.selectbox("Kies een optie", ["Optie 1", "Optie 2", "Optie 3"])
-
 st.write(f"Je hebt gekozen: {option}")
 # Home Page
 if page == "🏠 Home":
