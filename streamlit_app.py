@@ -52,7 +52,10 @@ if page == "🏠 Home":
     Gebruik de navigatie aan de linkerzijde om naar de visualisaties te gaan.
              
     Team 8:
-    Tammo van Leeuwen, Jorik Stavenuiter, Burhan Canbaz, Quint Klaassen
+    - Tammo van Leeuwen, 
+    - Jorik Stavenuiter, 
+    - Burhan Canbaz, 
+    - Quint Klaassen
     """)
 
 # Visualization Page
@@ -62,7 +65,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
 
 
     ## start code voor kaart
-    df = pd.read_csv("/Users/Quint/Desktop/Data science/Case 3/geo_drukte_df.csv")
+    df = pd.read_csv("dataset_aangepast.csv")
 
     zone_colors = {
         '1': [255, 0, 0],  # Red
