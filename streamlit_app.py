@@ -67,6 +67,8 @@ elif page == "🚲 Drukte Geo - Visualisatie":
     ## start code voor kaart
     df = pd.read_csv("geo_drukte.csv")
 
+    st.write(df)
+
     zone_colors = {
         '1': [255, 0, 0],  # Red
         '1,2' : [130, 200, 0],
@@ -168,8 +170,6 @@ elif page == "🚲 Drukte over de dag":
 
         ## start code voor kaart
     df_rent = pd.read_csv('finaal_df.csv')
-
-    # st.write(df_rent)
 
     tijdseenheid = st.selectbox('Selecteer tijdseenheid', ['Uur', 'Minuut'])
  
