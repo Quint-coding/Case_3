@@ -77,7 +77,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
         '3': [0, 0, 255]   # Blue
     }
 
-    df['Start Date'] = pd.to_datetime(df['Start Date'], format = '%m/%d/%Y %H:%M')
+    df['Start Date'] = pd.to_datetime(df['Start Date'], format = '%d/%m/%Y %H:%M')
 
     # Dropdown to select zone
     selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].astype(str).unique()))
