@@ -77,14 +77,14 @@ elif page == "🚲 Drukte Geo - Visualisatie":
         '3': [0, 0, 255]   # Blue
     }
 
-    # df['Start Date'] = pd.to_datetime(df['Start Date'])
+    df['Start Date'] = pd.to_datetime(df['Start Date'])
 
     # Dropdown to select zone
     selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].astype(str).unique()))
 
     # Slider to select date range
-    min_date = df['Start Date'].min()
-    max_date = df['Start Date'].max()
+    min_date = df['Start Date'].min().date()
+    max_date = df['Start Date'].max().date()
     selected_date = st.slider("Select Date", min_value=min_date, max_value=max_date, value=min_date)
 
     ## Wheather info
