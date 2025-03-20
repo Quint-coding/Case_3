@@ -130,7 +130,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
 
     # Compute traveler count display
     displayed_traveler_count = filtered_data['traveler_count'].mean() if selected_date == 'All' else filtered_data['traveler_count'].sum()
-    st.write(f"Total raveler Count: {displayed_traveler_count:.0f}")
+    st.write(f"Total traveler Count: {displayed_traveler_count:.0f}")
 
     # Ensure filtered data contains valid color mapping
     filtered_data['color'] = filtered_data['Zone'].map(zone_colors).apply(lambda x: x if isinstance(x, list) else [255, 255, 255])
