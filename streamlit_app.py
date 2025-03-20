@@ -66,6 +66,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
 
     ## start code voor kaart
     df = pd.read_csv("geo_drukte.csv")
+    st.write(df)
 
     zone_colors = {
         '1': [255, 0, 0],  # Red
@@ -76,9 +77,6 @@ elif page == "🚲 Drukte Geo - Visualisatie":
     }
 
     df['Start Date'] = pd.to_datetime(df['Start Date'], format='ISO8601')
-
-    st.write(df)
-
 
     # Dropdown to select zone
     selected_zone = st.selectbox("Select Zone", ['All'] + sorted(df['Zone'].astype(str).unique()))
