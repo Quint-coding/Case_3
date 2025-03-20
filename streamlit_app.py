@@ -163,6 +163,9 @@ elif page == "🚲 Drukte over de dag":
     st.title("🚲 Drukte over de dag")
     st.write("Interactieve weergave van fietsdrukte bij stations.")
 
+        ## start code voor kaart
+    df_rent = pd.read_csv('dataset_aangepast.csv')
+
     tijdseenheid = st.selectbox('Selecteer tijdseenheid', ['Uur', 'Minuut'])
  
     fig, ax = plt.subplots(figsize=(8, 6))  # Maak een lege figuur
