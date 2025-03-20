@@ -220,7 +220,30 @@ elif page == "🚲 Drukte Voorspellen":
     st.write("Interactieve weergave van fietsdrukte bij stations.")
 
     # Data inladen
-    df_grouped = pd.read_csv("processed_data.csv")
+    df = pd.read_csv('finaal_df.csv')
+    
+    # Data opschonen
+    df['dag_van_de_week_start'] = df['dag_van_de_week_start'].str.strip()
+    
+    # Aantal rentals per dag + uur tellen
+    df_grouped = df.groupby(['dag_van_de_week_start', 'uur']).agg({
+        'Duration': 'count',  # Aantal rentals
+        'tavg': 'mean', 'prcp': 'mean', 'wspd': 'mean'  # Gemiddelde weergegevens
+    }).reset_index()
+    
+    # Hernoemen
+    df_grouped.rename(columns={'Duration': 'rentals'}, inplace=True)
+    
+    # Gemiddeld aantal rentals per uur over ALLE dagen
+    df_avg_per_uur = df_grouped.groupby('uur')['rentals'].mean().reset_index()
+    df_avg_per_uur.rename(columns={'rentals': 'gem_rentals'}, inplace=True)
+    
+    # Data opslaan
+    df_grouped = df_grouped.merge(df_avg_per_uur, on="uur")
+    df_grouped['weercorrectie'] = (df_grouped['tavg'] / df_grouped['tavg'].mean()) * (1 - df_grouped['prcp'] / 10)
+    
+    # Finale voorspelling zonder ML (simpele schatting)
+    df_grouped['voorspelling'] = df_grouped['gem_rentals'] * df_grouped['weercorrectie']
     
     # Selecteer een dag
     dagen = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
