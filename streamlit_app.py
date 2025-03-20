@@ -3,6 +3,12 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 
 # Set page configuration
 st.set_page_config(page_title="Fietsdrukte Dashboard", page_icon="🚲", layout="wide")
@@ -46,7 +52,7 @@ if page == "🏠 Home":
     Gebruik de navigatie aan de linkerzijde om naar de visualisaties te gaan.
              
     Team 8:
-    Tammo van Leeuwen<br> Jorik Stavenuiter<br> Burhan Canbaz<br> Quint Klaassen
+    Tammo van Leeuwen, Jorik Stavenuiter, Burhan Canbaz, Quint Klaassen
     """)
 
 # Visualization Page
@@ -157,7 +163,35 @@ elif page == "🚲 Drukte over de dag":
     st.title("🚲 Drukte over de dag")
     st.write("Interactieve weergave van fietsdrukte bij stations.")
 
-
+    tijdseenheid = st.selectbox('Selecteer tijdseenheid', ['Uur', 'Minuut'])
+ 
+    fig, ax = plt.subplots(figsize=(8, 6))  # Maak een lege figuur
+ 
+    # Maak de plot op basis van de geselecteerde tijdseenheid
+    if tijdseenheid == 'Uur':
+        tijd_counts = df_rent['uur'].value_counts().sort_index()
+        tijd_counts = tijd_counts.reindex(range(24), fill_value=0)
+        ax.plot(tijd_counts.index, tijd_counts.values, marker='o', linestyle='-', color='dodgerblue', label="Per uur")
+        ax.set_xticks(range(24))  # Tick per uur
+ 
+    # Verwerking per minuut
+    if tijdseenheid == 'Minuut':
+        geselecteerd_uur = st.slider("Selecteer een uur", min_value=0, max_value=23, value=12)
+        df_filtered = df_rent[df_rent['uur'] == geselecteerd_uur]  # Filter op geselecteerd uur
+        tijd_counts = df_filtered['minuut'].value_counts().sort_index()
+        tijd_counts = tijd_counts.reindex(range(60), fill_value=0)
+        ax.plot(tijd_counts.index, tijd_counts.values, marker='o', linestyle='-', color='green', label=f"Minuten binnen {geselecteerd_uur}:00")
+ 
+    # Labels en titels
+    ax.set_title('Verdeling van waarnemingen')
+    ax.set_xlabel('Tijd')
+    ax.set_ylabel('Aantal waarnemingen')
+    ax.legend()
+ 
+    plt.tight_layout()
+ 
+    # Weergave in Streamlit
+    st.pyplot(fig)
 
 elif page == "🚲 Drukte Voorspellen":
     st.title("🚲 Drukte Voorspellen")
