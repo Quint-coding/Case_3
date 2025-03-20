@@ -62,7 +62,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
 
 
     ## start code voor kaart
-    df = pd.read_csv("../geo_drukte.csv")
+    df = pd.read_csv("/Users/Quint/Desktop/Data science/Case 3/geo_drukte_df.csv")
 
     zone_colors = {
         '1': [255, 0, 0],  # Red
