@@ -191,7 +191,7 @@ elif page == "🚲 Drukte over de dag":
     if geselecteerde_dag != "Alles":
         df_rent = df_rent[df_rent['dag_van_de_week_start'] == geselecteerde_dag]
  
-    st.write(f"Aantal rijen na filtering: {len(df_rent)}")  # Debugging: laat aantal overgebleven rijen zien
+    # st.write(f"Aantal rijen na filtering: {len(df_rent)}")  # Debugging: laat aantal overgebleven rijen zien
  
     fig, ax = plt.subplots(figsize=(8, 6))
  
@@ -273,34 +273,3 @@ elif page == "🚲 Drukte Voorspellen":
         voorspelling = max(0, gem_rentals * weercorrectie)
     
         st.subheader(f"📊 Geschat aantal verhuurde fietsen: {int(voorspelling)}")
-    
-    # # Filter de data: Alleen Duration < 30.000
-    # df_filtered = df[df['Duration'] < 3600]/3600
-    
-    # # Definieer onafhankelijke en afhankelijke variabele
-    # X = df_filtered[['uur']]
-    # y = df_filtered['Duration']
-    
-    # # Voeg een constante toe voor de OLS-regressie
-    # X = sm.add_constant(X)
-    
-    # # Voer de OLS-regressie uit
-    # model = sm.OLS(y, X).fit()
-    
-    # # Maak de voorspellingen
-    # df_filtered['Predicted_Duration'] = model.predict(X)
-    
-    # # Plot de resultaten
-    # plt.figure(figsize=(10, 6))
-    # plt.scatter(df_filtered['uur'], df_filtered['Duration'], color='blue', alpha=0.5, label='Data')
-    # plt.plot(df_filtered['uur'], df_filtered['Predicted_Duration'], color='red', label='OLS Regressielijn')
-    
-    # # Labels en titel
-    # plt.xlabel('Uur van de dag')
-    # plt.ylabel('Duur van de rit (seconden)')
-    # plt.title('OLS Regressie: Uur vs Duur van de Rit')
-    # plt.legend()
-    # plt.show()
-    
-    # # Print de regressie samenvatting
-    # model.summary()
