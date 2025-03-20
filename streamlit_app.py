@@ -169,7 +169,7 @@ elif page == "🚲 Drukte over de dag":
         ## start code voor kaart
     df_rent = pd.read_csv('finaal_df.csv')
 
-    st.write(df_rent)
+    # st.write(df_rent)
 
     tijdseenheid = st.selectbox('Selecteer tijdseenheid', ['Uur', 'Minuut'])
  
