@@ -151,7 +151,7 @@ elif page == "🚲 Drukte Geo - Visualisatie":
         # opacity=0.8,
         # stroked=True,
         filled=True,
-        radius_scale=2,
+        radius_scale=1,
         radius_min_pixels=1,
         radius_max_pixels=10,
         get_position="[Longitude, Latitude]",
